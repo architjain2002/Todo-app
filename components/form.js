@@ -1,17 +1,26 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, View, TextInput } from "react-native";
+import { StyleSheet, Text, View, TextInput, Button } from "react-native";
 
-export default function Form() {
+export default function Form(props) {
   const [text, settext] = useState("");
   const changeHandler = (val) => {
     settext(val);
   };
   return (
-    <TextInput
-      placeholder="new todo ..."
-      onChangeText={changeHandler}
-      style={styles.inputStyle}
-    />
+    <View>
+      <TextInput
+        placeholder="new todo ..."
+        onChangeText={changeHandler}
+        style={styles.inputStyle}
+      />
+      <Button
+        onPress={() => {
+          props.submitHandler(text);
+        }}
+        title="add todo"
+        color="green"
+      />
+    </View>
   );
 }
 const styles = StyleSheet.create({
