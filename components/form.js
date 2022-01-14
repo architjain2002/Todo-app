@@ -18,7 +18,7 @@ export default function Form(props) {
           props.submitHandler(text);
         }}
         title="add todo"
-        color="green"
+        color="#000B49"
       />
     </View>
   );

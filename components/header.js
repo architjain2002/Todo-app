@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
     height: 80,
     // width: 100,
     paddingTop: 50,
-    backgroundColor: "green",
+    backgroundColor: "#000B49",
   },
   title: {
     textAlign: "center",

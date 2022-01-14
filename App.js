@@ -1,5 +1,13 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, View, FlatList } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  FlatList,
+  ToastAndroid,
+  TouchableWithoutFeedback,
+  Keyboard,
+} from "react-native";
 
 // to generate unique ids for the array
 import "react-native-get-random-values";
@@ -27,22 +35,31 @@ export default function App() {
       setTodo((prevTodo) => {
         return [{ text: text, key: uuidv4() }, ...prevTodo];
       });
+    else {
+      ToastAndroid.show(
+        "Please Enter characters more than 1!",
+        ToastAndroid.SHORT,
+        "green"
+      );
+    }
   };
   return (
-    <View style={styles.container}>
-      <Header />
-      <View style={styles.content}>
-        <Form submitHandler={submitHandler} />
-        <View style={styles.list}>
-          <FlatList
-            data={Todo}
-            renderItem={({ item }) => (
-              <TodoList item={item} presshandler={presshandler} />
-            )}
-          />
+    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+      <View style={styles.container}>
+        <Header />
+        <View style={styles.content}>
+          <Form submitHandler={submitHandler} />
+          <View style={styles.list}>
+            <FlatList
+              data={Todo}
+              renderItem={({ item }) => (
+                <TodoList item={item} presshandler={presshandler} />
+              )}
+            />
+          </View>
         </View>
       </View>
-    </View>
+    </TouchableWithoutFeedback>
   );
 }
 
