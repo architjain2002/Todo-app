@@ -23,9 +23,10 @@ export default function App() {
     });
   };
   const submitHandler = (text) => {
-    setTodo((prevTodo) => {
-      return [{ text: text, key: uuidv4() }, ...prevTodo];
-    });
+    if (text.length != 0)
+      setTodo((prevTodo) => {
+        return [{ text: text, key: uuidv4() }, ...prevTodo];
+      });
   };
   return (
     <View style={styles.container}>
