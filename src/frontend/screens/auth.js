@@ -3,6 +3,20 @@ import { StyleSheet, Text, View, Button } from "react-native";
 // import * as Google from "expo-google-app-auth";
 import * as Google from "expo-auth-session/providers/google";
 export default function Auth(props) {
+  async function fetchUserInfo(token) {
+    const response = await fetch(
+      "https://www.googleapis.com/oauth2/v3/userinfo",
+      {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    return await response.json();
+  }
   const navigationHandler = () => {
     props.navigation.navigate("Home");
   };
@@ -18,7 +32,16 @@ export default function Auth(props) {
   });
   React.useEffect(() => {
     if (response?.type === "success") {
-      const { authentication } = response;
+      const {
+        authentication: { accessToken },
+      } = response;
+      fetchUserInfo(accessToken)
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     }
   }, [response]);
   return (

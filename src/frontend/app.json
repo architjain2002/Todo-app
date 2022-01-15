@@ -4,6 +4,7 @@
     "slug": "my-project",
     "version": "1.0.0",
     "orientation": "portrait",
+    "scheme":"my-project",
     "icon": "./assets/icon_todo.png",
     "splash": {
       "image": "./assets/splash_todo.png",
