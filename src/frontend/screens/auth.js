@@ -38,6 +38,7 @@ export default function Auth(props) {
       fetchUserInfo(accessToken)
         .then((res) => {
           console.log(res);
+          navigationHandler();
         })
         .catch((err) => {
           console.log(err);
