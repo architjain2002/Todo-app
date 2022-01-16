@@ -17,6 +17,18 @@ export default function Auth(props) {
     );
     return await response.json();
   }
+
+  async function postUserAuthInfo(data) {
+    const response = await fetch("http://192.168.0.104:3000/authData", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+    // return response.json();
+  }
+
   const navigationHandler = () => {
     props.navigation.navigate("Home");
   };
@@ -30,6 +42,7 @@ export default function Auth(props) {
       "758016975871-co4n3k6ruk9k1cqgc0r0r8sd1oa7ejle.apps.googleusercontent.com",
     // webClientId: "GOOGLE_GUID.apps.googleusercontent.com",
   });
+
   React.useEffect(() => {
     if (response?.type === "success") {
       const {
@@ -38,6 +51,20 @@ export default function Auth(props) {
       fetchUserInfo(accessToken)
         .then((res) => {
           console.log(res);
+          const data = {
+            Name: res.name,
+            Email: res.email,
+            PhotoUrl: res.picture,
+          };
+          postUserAuthInfo(data)
+            .then(() => {
+              console.log("auth data inserted");
+            })
+            .catch((err) => {
+              console.log(data);
+              console.log(err);
+            });
+
           navigationHandler();
         })
         .catch((err) => {

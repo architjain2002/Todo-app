@@ -11,7 +11,7 @@ const { find } = require("async");
 app.use(express.json());
 
 // hostname and port
-// const hostname = "0.0.0.0"; // ignore for deployment
+const hostname = "192.168.0.104"; // ignore for deployment
 const port = process.env.PORT || 3000;
 
 //database connections
@@ -34,7 +34,7 @@ app.post("/authData", (req, res) => {
 });
 // connect to the mongodb database
 mongoose
-  .connect("mongodb://localhost:27017", {
+  .connect("mongodb://localhost:27017/todo-app", {
     useNewUrlParser: true,
     // useCreateIndex: true,
     useUnifiedTopology: true,
@@ -47,6 +47,6 @@ mongoose
     console.log(err);
   });
 
-server.listen(port, () => {
+server.listen(port, hostname, () => {
   console.log(`server running`);
 });
