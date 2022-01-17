@@ -1,0 +1,31 @@
+POST http://192.168.0.104:3000/authData HTTP/1.1
+content-type: application/json
+
+
+{
+    "Name":"Archit",
+    "Email":"abcd@example",
+    "PhotoUrl":"http://example.com",
+    "TodoList":[{
+        "text":"abcde",
+        "val":"hello"
+    }]
+    
+}
+
+###
+
+POST http://192.168.0.104:3000/todoDelete HTTP/1.1
+content-type: application/json
+
+
+{
+    "Name":"Archit",
+    "Email":"abcd@example",
+    "PhotoUrl":"http://example.com",
+    "TodoList":[{
+        "text":"abcde",
+        "val":"hello"
+    }]
+    
+}

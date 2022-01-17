@@ -26,22 +26,35 @@ app.post("/authData", (req, res) => {
   AuthModel.findOne({ Email: req.body.Email }, (err, data) => {
     if (err) {
       console.log(err);
+      res.sendStatus(400);
     } else {
       if (data == null) {
         authObj.save();
       } else {
         console.log(data);
       }
+      res.sendStatus(200);
     }
   });
-  // .then((result) => {
-  //   res.end("inserted a new data");
-  // })
-  // .catch((err) => {
-  //   res.end("error in insertion");
-  // });
 });
-// connect to the mongodb database
+
+app.post("/todoDelete", (req, res) => {
+  AuthModel.deleteOne(
+    {
+      Email: req.body.Email,
+      TodoList: { $elemMatch: { val: req.body.TodoList[0].val } },
+    },
+    (err, data) => {
+      if (err) {
+        console.log(err);
+        res.sendStatus(400);
+      } else {
+        console.log(data);
+        res.sendStatus(200);
+      }
+    }
+  );
+});
 mongoose
   .connect("mongodb://localhost:27017/todo-app", {
     useNewUrlParser: true,
