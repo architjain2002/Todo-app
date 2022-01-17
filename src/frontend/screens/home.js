@@ -24,7 +24,12 @@ export default function Home(props) {
     // { text: "work2", key: uuidv4() },
     // { text: "work3", key: uuidv4() },
   ]);
-
+  React.useEffect(() => {
+    fetch("http://192.168.0.104:3000/getTodo").then((data) => {
+      console.log(data);
+      // response.json();
+    });
+  });
   const presshandler = (key) => {
     setTodo((prevTodo) => {
       // {props.navigation.getParam()}
@@ -81,6 +86,7 @@ export default function Home(props) {
       body: JSON.stringify(todoFinalItem),
     });
   }
+
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <View style={styles.container}>

@@ -37,6 +37,7 @@ app.post("/authData", (req, res) => {
     }
   });
 });
+app.get("/getTodo", (req, res) => {});
 
 app.post("/todoDelete", (req, res) => {
   AuthModel.updateOne(
