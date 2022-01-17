@@ -18,7 +18,7 @@ import Header from "../components/header";
 import TodoList from "../components/todolist";
 import Form from "../components/form";
 
-export default function Home() {
+export default function Home(props) {
   const [Todo, setTodo] = useState([
     { text: "work1", key: uuidv4() },
     { text: "work2", key: uuidv4() },
@@ -27,6 +27,8 @@ export default function Home() {
 
   const presshandler = (key) => {
     setTodo((prevTodo) => {
+      // {props.navigation.getParam()}
+      popTodoItem(key);
       return prevTodo.filter((todo) => todo.key != key);
     });
   };
@@ -38,11 +40,27 @@ export default function Home() {
     else {
       ToastAndroid.show(
         "Please Enter characters more than 1!",
-        ToastAndroid.SHORT,
-        "green"
+        ToastAndroid.SHORT
       );
     }
   };
+
+  // fetch request functions:
+
+  async function popTodoItem(key) {
+    data = {
+      Email: props.navigation.getParam("Email"),
+      val: "hello",
+    };
+    const response = await fetch("http://192.168.0.104:3000/todoDelete", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+  }
+
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <View style={styles.container}>

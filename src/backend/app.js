@@ -39,11 +39,14 @@ app.post("/authData", (req, res) => {
 });
 
 app.post("/todoDelete", (req, res) => {
-  AuthModel.deleteOne(
+  AuthModel.findOne(
     {
       Email: req.body.Email,
-      TodoList: { $elemMatch: { val: req.body.TodoList[0].val } },
+      // TodoList: { $elemMatch: { val: req.body.TodoList[0].val } },
+      // TodoList: { $elemMatch: { val: req.body.val } },
     },
+    { $pull: { TodoList: { val: req.body.val } } },
+    { safe: true, upsert: true },
     (err, data) => {
       if (err) {
         console.log(err);

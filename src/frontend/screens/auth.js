@@ -3,6 +3,8 @@ import { StyleSheet, Text, View, Button } from "react-native";
 // import * as Google from "expo-google-app-auth";
 import * as Google from "expo-auth-session/providers/google";
 export default function Auth(props) {
+  const [EmailId, setEmailId] = useState("");
+
   async function fetchUserInfo(token) {
     const response = await fetch(
       "https://www.googleapis.com/oauth2/v3/userinfo",
@@ -30,7 +32,7 @@ export default function Auth(props) {
   }
 
   const navigationHandler = () => {
-    props.navigation.navigate("Home");
+    props.navigation.navigate("Home", { Email: EmailId });
   };
   const [request, response, promptAsync] = Google.useAuthRequest({
     expoClientId:
@@ -56,6 +58,7 @@ export default function Auth(props) {
             Email: res.email,
             PhotoUrl: res.picture,
           };
+          setEmailId(res.email);
           postUserAuthInfo(data)
             .then(() => {
               console.log("auth data inserted");
