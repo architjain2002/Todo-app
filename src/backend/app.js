@@ -23,14 +23,19 @@ const AuthModel = require("./models/authModel");
 // route to post auth data from react to mongodb
 app.post("/authData", (req, res) => {
   const authObj = new AuthModel(req.body);
-  authObj
-    .save()
-    .then((result) => {
-      res.end("inserted a new data");
-    })
-    .catch((err) => {
-      res.end("error in insertion");
-    });
+  authObj.find({ Name: req.body.Name }, (err, data) => {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log(data);
+    }
+  });
+  // .then((result) => {
+  //   res.end("inserted a new data");
+  // })
+  // .catch((err) => {
+  //   res.end("error in insertion");
+  // });
 });
 // connect to the mongodb database
 mongoose
