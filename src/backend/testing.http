@@ -8,7 +8,7 @@ content-type: application/json
     "PhotoUrl":"http://example.com",
     "TodoList":[{
         "text":"abcde",
-        "val":"hello"
+        "key":"hello"
     }]
     
 }
@@ -46,6 +46,17 @@ content-type: application/json
 
 {
     "Email":"arcyjain2002@gmail.com",
-    "val":"123",
+    "key":"123",
     "text":"todo1"
 }
+
+###
+GET http://192.168.0.104:3000/getTodo?Email=arcyjain2002@gmail.com HTTP/1.1
+content-type: application/json
+
+# {
+#     "Email":"arcyjain2002@gmail.com",
+#     "val":"123",
+#     "text":"todo1"
+# }
+
