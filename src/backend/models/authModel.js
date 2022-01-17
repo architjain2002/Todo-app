@@ -18,7 +18,7 @@ const authSchema = new Schema({
   TodoList: [
     {
       text: String,
-      val: String,
+      key: String,
     },
   ],
 });

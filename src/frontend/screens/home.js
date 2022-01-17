@@ -20,9 +20,9 @@ import Form from "../components/form";
 
 export default function Home(props) {
   const [Todo, setTodo] = useState([
-    { text: "work1", key: uuidv4() },
-    { text: "work2", key: uuidv4() },
-    { text: "work3", key: uuidv4() },
+    // { text: "work1", key: uuidv4() },
+    // { text: "work2", key: uuidv4() },
+    // { text: "work3", key: uuidv4() },
   ]);
 
   const presshandler = (key) => {
@@ -33,11 +33,16 @@ export default function Home(props) {
     });
   };
   const submitHandler = (text) => {
-    if (text.length != 0)
+    if (text.length != 0) {
       setTodo((prevTodo) => {
-        return [{ text: text, key: uuidv4() }, ...prevTodo];
+        const newTodoItem = {
+          text: text,
+          key: uuidv4(),
+        };
+        pushTodoItem(newTodoItem);
+        return [newTodoItem, ...prevTodo];
       });
-    else {
+    } else {
       ToastAndroid.show(
         "Please Enter characters more than 1!",
         ToastAndroid.SHORT
@@ -50,8 +55,9 @@ export default function Home(props) {
   async function popTodoItem(key) {
     data = {
       Email: props.navigation.getParam("Email"),
-      val: "hello",
+      key: key,
     };
+    console.log(data);
     const response = await fetch("http://192.168.0.104:3000/todoDelete", {
       method: "POST",
       headers: {
@@ -61,6 +67,20 @@ export default function Home(props) {
     });
   }
 
+  async function pushTodoItem(todoUpdateItem) {
+    const todoFinalItem = Object.assign(
+      { Email: props.navigation.getParam("Email") },
+      todoUpdateItem
+    );
+    console.log(todoFinalItem);
+    const response = await fetch("http://192.168.0.104:3000/todoUpdate", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(todoFinalItem),
+    });
+  }
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <View style={styles.container}>

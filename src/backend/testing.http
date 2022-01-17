@@ -33,11 +33,19 @@ content-type: application/json
 POST http://192.168.0.104:3000/todoDelete HTTP/1.1
 content-type: application/json
 
-
 {
     "Name":"Archit",
     "Email":"arcyjain2002@gmail.com",
     "PhotoUrl":"http://example.com",
     "val":"hello"
-    
+}
+
+###
+POST http://192.168.0.104:3000/todoUpdate HTTP/1.1
+content-type: application/json
+
+{
+    "Email":"arcyjain2002@gmail.com",
+    "val":"123",
+    "text":"todo1"
 }

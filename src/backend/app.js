@@ -39,25 +39,43 @@ app.post("/authData", (req, res) => {
 });
 
 app.post("/todoDelete", (req, res) => {
-  AuthModel.findOne(
+  AuthModel.updateOne(
     {
       Email: req.body.Email,
       // TodoList: { $elemMatch: { val: req.body.TodoList[0].val } },
       // TodoList: { $elemMatch: { val: req.body.val } },
     },
-    { $pull: { TodoList: { val: req.body.val } } },
-    { safe: true, upsert: true },
-    (err, data) => {
-      if (err) {
-        console.log(err);
-        res.sendStatus(400);
-      } else {
-        console.log(data);
-        res.sendStatus(200);
-      }
-    }
-  );
+    { $pull: { TodoList: { key: req.body.key } } }
+  )
+    .then((data) => {
+      console.log(data);
+      res.sendStatus(200);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.sendStatus(400);
+    });
 });
+
+app.post("/todoUpdate", (req, res) => {
+  AuthModel.updateMany(
+    {
+      Email: req.body.Email,
+      // TodoList: { $elemMatch: { val: req.body.TodoList[0].val } },
+      // TodoList: { $elemMatch: { val: req.body.val } },
+    },
+    { $push: { TodoList: { text: req.body.text, key: req.body.key } } }
+  )
+    .then((data) => {
+      console.log(data);
+      res.sendStatus(200);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.sendStatus(400);
+    });
+});
+
 mongoose
   .connect("mongodb://localhost:27017/todo-app", {
     useNewUrlParser: true,
