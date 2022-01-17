@@ -25,11 +25,23 @@ export default function Home(props) {
     // { text: "work3", key: uuidv4() },
   ]);
   React.useEffect(() => {
-    fetch("http://192.168.0.104:3000/getTodo").then((data) => {
-      console.log(data);
-      // response.json();
-    });
-  });
+    fetch(
+      `http://192.168.0.104:3000/getTodo?Email=${props.navigation.getParam(
+        "Email"
+      )}`
+    )
+      .then((data) => {
+        return data.json();
+      })
+      .then((todos) => {
+        console.log(todos);
+        for (let index = 0; index < todos.length; index++) {
+          setTodo((prevTodo) => {
+            return [todos[index], ...prevTodo];
+          });
+        }
+      });
+  }, []);
   const presshandler = (key) => {
     setTodo((prevTodo) => {
       // {props.navigation.getParam()}

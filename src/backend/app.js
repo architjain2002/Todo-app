@@ -38,29 +38,25 @@ app.post("/authData", (req, res) => {
   });
 });
 app.get("/getTodo", (req, res) => {
-  AuthModel.find(
-    { Email: req.query.Email },
-    "TodoList text key",
-    (err, data) => {
-      if (err) {
-        console.log(err);
-        res.sendStatus(400);
-      } else {
-        console.log(JSON.stringify(data));
-        arr = [];
-        for (let index = 0; index < data[0].TodoList.length; index++) {
-          console.log(data[0].TodoList[index].text);
-          obj = {
-            text: data[0].TodoList[index].text,
-            key: data[0].TodoList[index].key,
-          };
-          arr[index] = obj;
-        }
-        console.log(arr);
-        res.send(arr);
+  AuthModel.find({ Email: req.query.Email }, "TodoList", (err, data) => {
+    if (err) {
+      console.log(err);
+      res.sendStatus(400);
+    } else {
+      console.log(JSON.stringify(data));
+      arr = [];
+      for (let index = 0; index < data[0].TodoList.length; index++) {
+        console.log(data[0].TodoList[index].text);
+        obj = {
+          text: data[0].TodoList[index].text,
+          key: data[0].TodoList[index].key,
+        };
+        arr[index] = obj;
       }
+      console.log(arr);
+      res.send(arr);
     }
-  );
+  });
 });
 
 app.post("/todoDelete", (req, res) => {
