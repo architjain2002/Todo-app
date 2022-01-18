@@ -19,12 +19,13 @@ import TodoList from "../components/todolist";
 import Form from "../components/form";
 
 export default function Home(props) {
-  const [Todo, setTodo] = useState([
-    // { text: "work1", key: uuidv4() },
-    // { text: "work2", key: uuidv4() },
-    // { text: "work3", key: uuidv4() },
-  ]);
+  const [Todo, setTodo] = useState([]);
+  const [currEmail, setEmail] = useState("");
   React.useEffect(() => {
+    setEmail(props.navigation.getParam("Email"));
+    setTodo[[]];
+    // var str = `http://192.168.0.104:3000/getTodo?Email=${currEmail}`;
+    // console.log(str);
     fetch(
       `http://192.168.0.104:3000/getTodo?Email=${props.navigation.getParam(
         "Email"

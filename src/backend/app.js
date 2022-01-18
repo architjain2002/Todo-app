@@ -43,8 +43,9 @@ app.get("/getTodo", (req, res) => {
       console.log(err);
       res.sendStatus(400);
     } else {
-      console.log(JSON.stringify(data));
+      console.log(data[0]);
       arr = [];
+      // if (data[0].TodoList != undefined)
       for (let index = 0; index < data[0].TodoList.length; index++) {
         console.log(data[0].TodoList[index].text);
         obj = {
