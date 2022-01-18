@@ -20,14 +20,15 @@ export default function Auth(props) {
     return await response.json();
   }
 
-  async function postUserAuthInfo(data) {
-    const response = await fetch("http://192.168.0.104:3000/authData", {
+  function postUserAuthInfo(data) {
+    const response = fetch("http://192.168.0.104:3000/authData", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(data),
     });
+    console.log("auth data inserted");
     // return response.json();
   }
 
@@ -58,15 +59,16 @@ export default function Auth(props) {
             Email: res.email,
             PhotoUrl: res.picture,
           };
-          setEmailId(res.email);
-          postUserAuthInfo(data)
-            .then(() => {
-              console.log("auth data inserted");
-            })
-            .catch((err) => {
-              console.log(data);
-              console.log(err);
-            });
+          setEmailId(data.Email);
+          console.log(EmailId);
+          postUserAuthInfo(data);
+          // .then(() => {
+          //   console.log("auth data inserted");
+          // })
+          // .catch((err) => {
+          //   console.log(data);
+          //   console.log(err);
+          // });
 
           navigationHandler();
         })

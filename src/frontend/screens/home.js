@@ -23,14 +23,17 @@ export default function Home(props) {
   const [currEmail, setEmail] = useState("");
   React.useEffect(() => {
     setEmail(props.navigation.getParam("Email"));
+    console.log(props.navigation.getParam("Email"));
     setTodo[[]];
-    // var str = `http://192.168.0.104:3000/getTodo?Email=${currEmail}`;
-    // console.log(str);
-    fetch(
-      `http://192.168.0.104:3000/getTodo?Email=${props.navigation.getParam(
-        "Email"
-      )}`
-    )
+    var str = `http://192.168.0.104:3000/getTodo?Email=${props.navigation.getParam(
+      "Email"
+    )}`;
+    console.log(str);
+    // fetch(
+    //   `http://192.168.0.104:3000/getTodo?Email=${props.navigation.getParam(
+    //     "Email"
+    //   )}`
+    fetch(str)
       .then((data) => {
         return data.json();
       })
@@ -42,7 +45,7 @@ export default function Home(props) {
           });
         }
       });
-  }, []);
+  }, [currEmail]);
   const presshandler = (key) => {
     setTodo((prevTodo) => {
       // {props.navigation.getParam()}
