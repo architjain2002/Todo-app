@@ -78,7 +78,7 @@ export default function Auth(props) {
   return (
     <View style={styles.container}>
       <Text>hello world</Text>
-      <Button title="To home" onPress={navigationHandler} />
+      {/* <Button title="To home" onPress={navigationHandler} /> */}
       <Button
         disabled={!request}
         title="Login"

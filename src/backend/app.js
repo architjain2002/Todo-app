@@ -11,7 +11,8 @@ const { find } = require("async");
 app.use(express.json());
 
 // hostname and port
-const hostname = "192.168.0.104"; // ignore for deployment
+// const hostname = "192.168.0.104"; // ignore for deployment
+const hostname = "192.168.0.104";
 const port = process.env.PORT || 3000;
 
 //database connections
