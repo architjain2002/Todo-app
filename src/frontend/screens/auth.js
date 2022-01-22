@@ -32,8 +32,8 @@ export default function Auth(props) {
     // return response.json();
   }
 
-  const navigationHandler = () => {
-    props.navigation.navigate("Home", { Email: EmailId });
+  const navigationHandler = (params_EmailId) => {
+    props.navigation.navigate("Home", { Email: params_EmailId });
   };
   const [request, response, promptAsync] = Google.useAuthRequest({
     expoClientId:
@@ -62,6 +62,7 @@ export default function Auth(props) {
           setEmailId(data.Email);
           console.log(EmailId);
           postUserAuthInfo(data);
+          navigationHandler(EmailId);
           // .then(() => {
           //   console.log("auth data inserted");
           // })
@@ -69,14 +70,12 @@ export default function Auth(props) {
           //   console.log(data);
           //   console.log(err);
           // });
-
-          navigationHandler();
         })
         .catch((err) => {
           console.log(err);
         });
     }
-  }, [response]);
+  }, [response, EmailId]);
   return (
     <View style={styles.container}>
       <Text>hello world</Text>

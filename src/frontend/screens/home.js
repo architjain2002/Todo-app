@@ -17,35 +17,36 @@ import { v4 as uuidv4 } from "uuid";
 import Header from "../components/header";
 import TodoList from "../components/todolist";
 import Form from "../components/form";
-
+import { useFocusEffect } from "@react-navigation/native";
 export default function Home(props) {
   const [Todo, setTodo] = useState([]);
   const [currEmail, setEmail] = useState("");
-  React.useEffect(() => {
-    setEmail(props.navigation.getParam("Email"));
-    console.log(props.navigation.getParam("Email"));
-    setTodo[[]];
-    var str = `http://192.168.0.104:3000/getTodo?Email=${props.navigation.getParam(
-      "Email"
-    )}`;
-    console.log(str);
-    // fetch(
-    //   `http://192.168.0.104:3000/getTodo?Email=${props.navigation.getParam(
-    //     "Email"
-    //   )}`
-    fetch(str)
-      .then((data) => {
-        return data.json();
-      })
-      .then((todos) => {
-        console.log(todos);
-        for (let index = 0; index < todos.length; index++) {
-          setTodo((prevTodo) => {
-            return [todos[index], ...prevTodo];
-          });
-        }
-      });
-  }, [currEmail]);
+  React.useEffect(
+    React.useCallback(() => {
+      // if (props.navigation.isFocused()) {
+      setEmail(props.navigation.getParam("Email"));
+      console.log(props.navigation.getParam("Email"));
+      setTodo[[]];
+      var str = `http://192.168.0.104:3000/getTodo?Email=${currEmail}`;
+      console.log(str);
+      // fetch(
+      //   `http://192.168.0.104:3000/getTodo?Email=${props.navigation.getParam(
+      //     "Email"
+      //   )}`
+      fetch(str)
+        .then((data) => {
+          return data.json();
+        })
+        .then((todos) => {
+          console.log(todos);
+          for (let index = 0; index < todos.length; index++) {
+            setTodo((prevTodo) => {
+              return [todos[index], ...prevTodo];
+            });
+          }
+        });
+    }, [props.navigation.isFocused()])
+  );
   const presshandler = (key) => {
     setTodo((prevTodo) => {
       // {props.navigation.getParam()}
