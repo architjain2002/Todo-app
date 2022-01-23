@@ -46,17 +46,21 @@ app.get("/getTodo", (req, res) => {
     } else {
       console.log(data[0]);
       arr = [];
-      // if (data[0].TodoList != undefined)
-      for (let index = 0; index < data[0]["TodoList"].length; index++) {
-        console.log(data[0]["TodoList"][index].text);
-        obj = {
-          text: data[0].TodoList[index].text,
-          key: data[0].TodoList[index].key,
-        };
-        arr[index] = obj;
+      if (data[0]["TodoList"] != undefined) {
+        for (let index = 0; index < data[0]["TodoList"].length; index++) {
+          console.log(data[0]["TodoList"][index].text);
+          obj = {
+            text: data[0].TodoList[index].text,
+            key: data[0].TodoList[index].key,
+          };
+          arr[index] = obj;
+        }
+        console.log(arr);
+        res.send(arr);
+      } else {
+        arr = [];
+        res.send(arr);
       }
-      console.log(arr);
-      res.send(arr);
     }
   });
 });

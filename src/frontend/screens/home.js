@@ -24,6 +24,7 @@ export default function Home(props) {
   React.useEffect(() => {
     // if (props.navigation.isFocused()) {
     setTodo[[]];
+    fl.data = [];
     setEmail(props.navigation.getParam("Email", "xyz@gmail.com"));
     console.log(props.navigation.getParam("Email"));
     var str = `http://192.168.0.104:3000/getTodo?Email=${props.navigation.getParam(
@@ -50,6 +51,10 @@ export default function Home(props) {
         console.log(err);
       });
   }, [props.navigation.getParam("Email")]);
+
+  // React.useLayoutEffect(() => {
+  //   setTodo[[]];
+  // }, [props.navigation.getParam("Email")]);
   const presshandler = (key) => {
     setTodo((prevTodo) => {
       // {props.navigation.getParam()}
@@ -115,6 +120,7 @@ export default function Home(props) {
           <Form submitHandler={submitHandler} />
           <View style={styles.list}>
             <FlatList
+              className="flatlist"
               data={Todo}
               renderItem={({ item }) => (
                 <TodoList item={item} presshandler={presshandler} />
