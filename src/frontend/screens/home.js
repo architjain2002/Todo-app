@@ -23,10 +23,12 @@ export default function Home(props) {
   const [currEmail, setEmail] = useState("");
   React.useEffect(() => {
     // if (props.navigation.isFocused()) {
+    setTodo[[]];
     setEmail(props.navigation.getParam("Email", "xyz@gmail.com"));
     console.log(props.navigation.getParam("Email"));
-    setTodo[[]];
-    var str = `http://192.168.0.104:3000/getTodo?Email=${currEmail}`;
+    var str = `http://192.168.0.104:3000/getTodo?Email=${props.navigation.getParam(
+      "Email"
+    )}`;
     console.log(str);
     // fetch(
     //   `http://192.168.0.104:3000/getTodo?Email=${props.navigation.getParam(
@@ -47,7 +49,7 @@ export default function Home(props) {
       .catch((err) => {
         console.log(err);
       });
-  }, [currEmail]);
+  }, [props.navigation.getParam("Email")]);
   const presshandler = (key) => {
     setTodo((prevTodo) => {
       // {props.navigation.getParam()}

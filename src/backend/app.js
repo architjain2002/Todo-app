@@ -47,8 +47,8 @@ app.get("/getTodo", (req, res) => {
       console.log(data[0]);
       arr = [];
       // if (data[0].TodoList != undefined)
-      for (let index = 0; index < data[0].TodoList.length; index++) {
-        console.log(data[0].TodoList[index].text);
+      for (let index = 0; index < data[0]["TodoList"].length; index++) {
+        console.log(data[0]["TodoList"][index].text);
         obj = {
           text: data[0].TodoList[index].text,
           key: data[0].TodoList[index].key,
