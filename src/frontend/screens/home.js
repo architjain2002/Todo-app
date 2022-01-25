@@ -24,13 +24,12 @@ export default function Home(props) {
   React.useEffect(() => {
     // if (props.navigation.isFocused()) {
     // {props.navigation.getParam()}
-    for (let index = 0; index < Todo.length; index++) {
-      setTodo((prevTodo) => {
-        return prevTodo.filter((todo) => Todo.key != key);
-      });
-    }
+    // for (let index = 0; index < Todo.length; index++) {
+    //   setTodo((prevTodo) => {
+    //     return prevTodo.filter((todo) => Todo.key == null);
+    //   });
+    // }
     setTodo[[]];
-    fl.data = [];
     setEmail(props.navigation.getParam("Email", "xyz@gmail.com"));
     console.log(props.navigation.getParam("Email"));
     var str = `http://192.168.0.104:3000/getTodo?Email=${props.navigation.getParam(
