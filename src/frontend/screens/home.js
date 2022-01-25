@@ -23,6 +23,12 @@ export default function Home(props) {
   const [currEmail, setEmail] = useState("");
   React.useEffect(() => {
     // if (props.navigation.isFocused()) {
+    // {props.navigation.getParam()}
+    for (let index = 0; index < Todo.length; index++) {
+      setTodo((prevTodo) => {
+        return prevTodo.filter((todo) => Todo.key != key);
+      });
+    }
     setTodo[[]];
     fl.data = [];
     setEmail(props.navigation.getParam("Email", "xyz@gmail.com"));
